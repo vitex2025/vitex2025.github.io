@@ -1,0 +1,144 @@
+.dotted-box {
+  border: 2px dotted #888; /* Set the border style to dotted and color to black */
+  border-radius: 20px; /* Set border radius for rounded corners */
+  padding: 10px; /* Add some padding to the content inside the box */
+}
+
+.center-stuff {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+}
+
+.btn {
+  background-color: #cde;
+  color: black;
+  padding: 8px;
+  margin: 10px;
+  font-size: 16px;
+  /* border: 2px solid black; */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #def;
+}
+
+.vis midi-player {
+  display: block;
+  width: inherit;
+  margin: 4px;
+  margin-bottom: 0;
+}
+
+.vis midi-player::part(control-panel) {
+  /* background: #252a34; */
+  border: 2px solid #000;
+  border-radius: 10px 10px 0 0;
+}
+
+.vis midi-player::part(play-button) {
+  color: #222;
+  border: 2px solid currentColor;
+  background-color: #ddd;
+  border-radius: 20px;
+  transition: all 0.2s;
+  content: "hello";
+}
+
+.vis midi-player::part(play-button):hover {
+  color: #000;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+midi-player::part(time) {
+  font-family: monospace;
+}
+
+/* Custom visualizer style */
+midi-visualizer .piano-roll-visualizer {
+  /* background: #252a34; */
+  border: 2px solid black;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin: 4px;
+  margin-top: 0;
+  overflow: auto;
+  max-height: fit-content;
+  min-height: fit-content;
+}
+
+midi-visualizer svg rect.note {
+  opacity: 0.4;
+  stroke-width: 3;
+}
+
+midi-visualizer svg rect.note[data-instrument="0"] {
+  fill: #3d81ee;
+}
+
+midi-visualizer svg rect.note[data-instrument="1"] {
+  fill: #a841ed;
+}
+
+midi-visualizer svg rect.note[data-instrument="2"] {
+  fill: #a70808;
+}
+
+midi-visualizer svg rect.note[data-instrument="3"] {
+  fill: #5b2e01;
+}
+
+
+midi-visualizer .piano-roll-visualizer svg {
+  background: linear-gradient(90deg, #aaa 1px, transparent 1px 15px, rgba(170, 170, 170, 0.3333333333) 16px, transparent 16px 30px, rgba(170, 170, 170, 0.3333333333) 31px, transparent 31px 45px, rgba(170, 170, 170, 0.3333333333) 46px, transparent 46px) left/60px repeat;
+}
+
+midi-visualizer svg rect.note[data-is-drum=true] {
+  fill: #000000;
+  /* stroke: #888; */
+}
+
+
+midi-visualizer svg rect.note.active {
+  opacity: 0.9;
+  stroke: #000000;
+}
+
+.legend {
+  border: 2px dotted #888; /* Set the border style to dotted and color to black */
+  border-radius: 20px; /* Set border radius for rounded corners */
+  padding-bottom: 0px;
+  padding-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border: 1px solid #000; /* Black border for better visibility */
+}
+
+
+
+
+
+
+/*# sourceMappingURL=styles.css.map */

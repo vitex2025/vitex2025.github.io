@@ -78,21 +78,31 @@ midi-visualizer svg rect.note {
   stroke-width: 3;
 }
 
-midi-visualizer svg rect.note[data-instrument="0"] {
-  fill: #3d81ee;
+midi-visualizer svg rect.note[data-program="0"] {
+  fill: #166efb;
 }
 
-midi-visualizer svg rect.note[data-instrument="1"] {
-  fill: #a841ed;
+midi-visualizer svg rect.note[data-program="16"] {
+  fill: #007e4c;
 }
 
-midi-visualizer svg rect.note[data-instrument="2"] {
+midi-visualizer svg rect.note[data-program="24"] {
   fill: #a70808;
 }
 
-midi-visualizer svg rect.note[data-instrument="3"] {
-  fill: #5b2e01;
+midi-visualizer svg rect.note[data-program="32"] {
+  fill: #660192;
 }
+midi-visualizer svg rect.note[data-program="40"] {
+  fill: #642f00;
+}
+midi-visualizer svg rect.note[data-program="48"] {
+  fill: #e744ce;
+}
+midi-visualizer svg rect.note[data-program="80"] {
+  fill: #64e5ff;
+}
+
 
 
 midi-visualizer .piano-roll-visualizer svg {

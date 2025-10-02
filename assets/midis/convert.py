@@ -1,18 +1,26 @@
 import muspy
 
 
-file_name = "vitex_0_no_chord"
-midi = muspy.read_midi(f'{file_name}.mid')
-for track in midi.tracks:
-    if track.program == 0:
-        for note in track.notes:
-            note.velocity = 70
-    if track.program/8 == 2 or track.program/8 == 3:
-        for note in track.notes:
-            note.velocity = 105
+def clean_file(file_name):
 
-midi.tempos=[muspy.Tempo(0, 100)]
-midi.write_midi(f"{file_name}_new_tempo.mid")
+    midi = muspy.read_midi(f'{file_name}.mid')
+    for track in midi.tracks:
+        if track.program == 0:
+            for note in track.notes:
+                note.velocity = 70
+        if track.program/8 == 2 or track.program/8 == 3:
+            for note in track.notes:
+                note.velocity = 105
+
+    midi.tempos=[muspy.Tempo(0, 90)]
+    midi.write_midi(f"{file_name}.mid")
+
+# 遍历所有midi
+import os
+for file in os.listdir("."):
+    if file.endswith(".mid"):
+        clean_file(file[:-4])
+
 
 # INSTRUMENT_CATEGORY = [
 #     "piano",

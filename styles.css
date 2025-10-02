@@ -96,7 +96,7 @@ midi-visualizer svg rect.note[data-instrument="3"] {
 
 
 midi-visualizer .piano-roll-visualizer svg {
-  background: linear-gradient(90deg, #aaa 1px, transparent 1px 15px, rgba(170, 170, 170, 0.3333333333) 16px, transparent 16px 30px, rgba(170, 170, 170, 0.3333333333) 31px, transparent 31px 45px, rgba(170, 170, 170, 0.3333333333) 46px, transparent 46px) left/60px repeat;
+  background: linear-gradient(90deg, #aaa 1px, transparent 1px 20px, rgba(170, 170, 170, 0.3333333333) 21px, transparent 21px 40px, rgba(170, 170, 170, 0.3333333333) 41px, transparent 41px 60px, rgba(170, 170, 170, 0.3333333333) 61px, transparent 61px) left/80px repeat;
 }
 
 midi-visualizer svg rect.note[data-is-drum=true] {

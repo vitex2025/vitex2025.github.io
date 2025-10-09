@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ViTex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    p {
+      font-size: 25px; /* 改成你想要的字号 */
+    }
+  </style>
+</head>
+
+<body>
+    <header>
+        <h1>ViTex: Visual Texture Control for Multi-track Symbolic Music Generation via Discrete Diffusion Models</h1>
+        <h2><a href="https://github.com/F1shYi/ViTex">Code Repo</a></h2>
+        <h3>Xiaoyu Yi, Qi He, Gus Xia, Ziyu Wang</h3>
+    </header>
+
+    <h1>
+        Conditional Generation Given ViTex and Chord Progression
+    </h1>
+    <p>
+        Our model takes ViTex and chord progression as inputs and generates multi-track symbolic music.
+      Below is a demo — click the left/right arrow buttons to switch between different ViTex–chord progression pairs, and the corresponding generated result will be displayed on the right.
+    </p>
+
+    <section class="horizontal-section">
+        <!-- 图片 -->
+        <div class="block">
+            <h2>ViTex (Instrumentation)</h2>
+            <img id="carousel-image" src="assets_cond_gen/v259.png" alt="carousel" class="square-image" />
+            <div class="controls">
+                <button onclick="prevImage()">&#8592; Prev</button>
+                <span id="image-index">1 / 3</span>
+                <button onclick="nextImage()">Next &#8594;</button>
+            </div>
+        </div>
+
+        <!-- 加号 -->
+        <div class="symbol">
+            <h2>+</h2>
+        </div>
+   
+        <!-- Chord -->
+        <div class="block">
+            <h2>Chord Progression</h2>
+            <midi-visualizer src="assets_cond_gen/c9.mid" type="piano-roll" id="midi-visualizer"></midi-visualizer>
+            <midi-player
+                src="assets_cond_gen/c9.mid"
+                sound-font visualizer="#midi-visualizer" id="midi-player">
+            </midi-player>
+            <div class="controls">
+                <button onclick="prevChord()">&#8592; Prev</button>
+                <span id="chord-index">1 / 3</span>
+                <button onclick="nextChord()">Next &#8594;</button>
+            </div>
+        </div>
+
+        <!-- 等号 -->
+        <div class="symbol">
+            <h2>=</h2>
+        </div>
+
+        <!-- Audio -->
+        <div class="block">
+            <h2>Multi-track Music</h2>
+            <img id="audio-pianoroll" src="assets_cond_gen/v259c9.png" alt="Audio pianoroll", class="square-image">
+            <audio id="audio-player" src="assets_cond_gen/v259c9.mp3" controls></audio>
+        </div>
+    </section>
+    
+
+    <h1>
+        Prompt Continuation
+    </h1>
+    <section class="prompt-continuation-section">
+        <div class="text-description">
+            <p>
+                By leveraging diffusion-based inpainting, our model supports music continuation given prompts.
+    On the right is an example of prompt continuation: we feed the first two bars of the ground-truth piece, along with their corresponding ViTex and chord progression, into the model to generate the following six bars.
+    We also compare our results with those produced by the Anticipatory Music Transformer (AMT).
+            </p>
+        </div>
+        <div class="comparison-results">
+            <div class="given-prompt-column">
+                <h3>Given Prompt</h3>
+                <img id="given-prompt-image" src="assets_cont/830/prompt.png" alt="Given Prompt" class="square-image">
+                <audio id="given-prompt-audio-player" src="assets_cont/830/prompt.mp3" controls></audio>
+            </div>
+            <div class="comparison-right-panel">
+                <div class="comparison-boxes">
+                    <div class="comparison-box" id="ground-truth-box" onclick="showComparison('ground-truth')">
+                        <h3>Ground Truth</h3>
+                    </div>
+                    <div class="comparison-box" id="ours-box" onclick="showComparison('ours')">
+                        <h3>Ours</h3>
+                    </div>
+                    <div class="comparison-box" id="amt-box" onclick="showComparison('amt')">
+                        <h3>AMT</h3>
+                    </div>
+                </div>
+                <div class="comparison-display">
+                    <img id="comparison-pianoroll" src="" alt="Comparison Pianoroll" class="square-image">
+                    <audio id="comparison-audio-player" src="" controls></audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/html-midi-player@1.5.0"></script>
+    <script src="script.js"></script>
+</body>
+</html>

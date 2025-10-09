@@ -26,8 +26,8 @@ header {
     min-height: 500px; /* Added to ensure consistent height */
 }
 .square-image {
-  width: 600px; /* 设置您想要的固定宽度 */
-  height: 500px; /* 设置与宽度相同的高度，以形成正方形 */
+  width: 500; /* 设置您想要的固定宽度 */
+  height: 400px; /* 设置与宽度相同的高度，以形成正方形 */
   object-fit: contain; /* 确保图片覆盖整个正方形区域，可能会裁剪图片 */
   display: block; /* 确保图片作为一个块级元素，以便设置宽度和高度 */
 }

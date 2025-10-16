@@ -9,31 +9,54 @@ header {
     margin-bottom: 40px;
 }
 
+h1 {
+    font-size: 1.8em;
+}
+
+
+h2 {
+    font-size: 1.7em;
+}
+
+.text-description{
+    max-width: 70%; /* Adjust this value as needed */
+    margin: 20px auto; /* Center the elements and add vertical spacing */
+    text-align: left; /* Center text within these elements */
+}
+
 .horizontal-section {
-    display: flex;
     align-items: center; /* Changed from flex-start to center */
+    display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
+    margin: 50px auto 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    
 }
 
 .block {
-    flex: 1;
+    flex: 1 1 33%;
     text-align: center;
     display: flex;
     flex-direction: column; /* 将主轴方向设置为垂直，这样子元素会垂直堆叠 */
     justify-content: center; /* 垂直居中所有子元素 */
     align-items: center;     /* 水平居中所有子元素 */
-    min-height: 500px; /* Added to ensure consistent height */
+    min-height: 600px; /* Added to ensure consistent height */
+    padding: 10px;
+    box-sizing: border-box;
 }
+
 .square-image {
-  width: 500; /* 设置您想要的固定宽度 */
-  height: 400px; /* 设置与宽度相同的高度，以形成正方形 */
+  width: 100%; /* 设置您想要的固定宽度 */
+  height: auto; /* 设置与宽度相同的高度，以形成正方形 */
+  max-height: 550px;
   object-fit: contain; /* 确保图片覆盖整个正方形区域，可能会裁剪图片 */
   display: block; /* 确保图片作为一个块级元素，以便设置宽度和高度 */
 }
 
 img, audio {
-    
+    width: 100%;
     height: auto;
     margin-bottom: 10px;
 }
@@ -46,7 +69,7 @@ img, audio {
     margin-top: 5px;
 }
 .block audio {
-  max-width: 80%; /* 限制音频播放器的最大宽度，例如设置为父容器的80% */
+  max-width: 90%; /* 限制音频播放器的最大宽度，例如设置为父容器的80% */
   width: 100%; /* 确保在宽度小于max-width时能充分利用空间 */
   min-height: 30px;
 }
@@ -56,11 +79,7 @@ img, audio {
     flex-direction: column; /* 将主轴方向设置为垂直，这样子元素会垂直堆叠 */
     justify-content: center; /* 垂直居中所有子元素 */
     align-items: center;     /* 水平居中所有子元素 */
-    /* ... existing code ... */
 }
-
-
-
 button {
     font-size: 16px;
     padding: 5px 10px;
@@ -71,11 +90,11 @@ button {
 .symbol {
     text-align: center;
     font-size: 32px;
-    width: 50px;
+    flex: 0 0 50px;
     display: flex; /* Added for vertical centering */
     align-items: center; /* Added for vertical centering */
     justify-content: center; /* Added for horizontal centering */
-    height: 500px; /* Set a fixed height to match the square-image height */
+    height: 400px; /* Set a fixed height to match the square-image height */
 }
 
 .chord-text-container {
@@ -85,11 +104,27 @@ button {
 }
 
 .pianoroll-container img {
-    max-width: 200px;
+    max-width: inherit;
     height: auto;
     margin-bottom: 10px;
     border-radius: 6px;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+.chord_progression {
+    flex: 0 0 15%; /* Calculated width */
+    min-height: 400px; /* To match block height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Adjust midi-visualizer inside chord_progression */
+.chord_progression midi-visualizer {
+    max-height: 300px; /* To match square-image max-height */
+    width: 100%;
+    object-fit: contain;
 }
 
 
@@ -99,28 +134,13 @@ button {
     gap: 40px;
     margin-top: 50px;
     padding: 20px;
-    background-color: #eef;
     border-radius: 8px;
+    width: 600px;
+    margin: 50px auto 0 auto;
 }
 
-.text-description {
-    flex: 1;
-    max-width: 600px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
 
-.text-description h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
 
-.text-description p {
-    line-height: 1.6;
-    text-align: justify;
-}
 
 .comparison-results {
     flex: 2;
@@ -174,7 +194,7 @@ button {
 }
 
 
-.comparison-box {
+.comparison-box-830 {
     width: 150px;
     height: 40px;
     display: flex;
@@ -187,19 +207,82 @@ button {
     transition: all 0.3s ease;
 }
 
-.comparison-box:hover {
+.comparison-box-830:hover {
     background-color: #e0e0e0;
     border-color: #999;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.comparison-box.active {
+.comparison-box-830.active {
     background-color: #d0e0ff;
     border-color: #f7f9fa00;
     box-shadow: 0 4px 8px rgba(0,123,255,0.3);
 }
 
-.comparison-box h3 {
+.comparison-box-830 h3 {
+    margin: 0;
+    color: #333;
+}
+
+
+
+.comparison-box-532 {
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.comparison-box-532:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.comparison-box-532.active {
+    background-color: #d0e0ff;
+    border-color: #f7f9fa00;
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+
+.comparison-box-532 h3 {
+    margin: 0;
+    color: #333;
+}
+
+
+.comparison-box-128 {
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.comparison-box-128:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.comparison-box-128.active {
+    background-color: #d0e0ff;
+    border-color: #f7f9fa00;
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+
+.comparison-box-128 h3 {
     margin: 0;
     color: #333;
 }
@@ -225,4 +308,54 @@ button {
     width: 80%;
     max-width: 500px;
     min-height: 30px;
+}
+
+.control-table-container {
+  margin: 20px 0;
+  overflow-x: auto;
+  background-color: #ffffff;
+  padding: 20px; /* 外部的边距，你可以根据需要调整大小 */
+  border-radius: 8px; /* 可选：添加圆角 */
+}
+
+.control-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  
+}
+
+.control-comparison-table th,
+.control-comparison-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.control-comparison-table th:first-child,
+.control-comparison-table td:first-child {
+  font-weight: bold; /* 字体加粗 */
+  width: 5%; /* 设置宽度为15%，你可以根据需要调整此值 */
+}
+
+.control-comparison-table img {
+  display: block; /* 使图片成为块级元素 */
+  margin: 0 auto; /* 水平居中 */
+  width: 100%;
+  height: auto; /* 设置固定高度，你可以根据需要调整此值 */
+  aspect-ratio: 5 / 4;
+  object-fit: cover; /* 保持图片宽高比，裁剪超出部分以填充容器 */
+  object-position: bottom;
+  transform: scale(1.001);
+}
+
+.control-comparison-table audio {
+  width: 100%;
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+.cccc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

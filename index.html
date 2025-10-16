@@ -9,6 +9,19 @@
       font-size: 25px; /* 改成你想要的字号 */
     }
   </style>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],  // 支持 $...$ 和 \( ... \)
+        displayMath: [['$$', '$$'], ['\\[', '\\]']] // 支持 $$...$$ 和 \[ ... \]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
 </head>
 
 <body>
@@ -18,13 +31,51 @@
         <h3>Xiaoyu Yi, Qi He, Gus Xia, Ziyu Wang</h3>
     </header>
 
+    <section class="text-description">
+        <p style="font-size: 1.1em; line-height: 1.6;">
+    We propose ViTex: a representation that can (1) intuitively visualize track-wise, texture-level instrumentation ideas, and (2) serve as a conditioning signal to guide music generation.  
+    We further train a discrete diffusion model that takes ViTex and chord progression as inputs to generate multi-track symbolic music.  
+    Our model focuses on 4/4 time signature and 8-bar pieces.  
+    This demo page showcases our model's outputs under different generation settings, organized as follows:
+    </p>
+
+<ol style="font-size: 1.1em; line-height: 1.6;">
+  <li>
+    <b>Conditional Generation Given ViTex and Chord Progression</b><br>
+    Given different ViTex and chord progressions as inputs, our model produces diverse generations.
+  </li>
+  <li>
+    <b>Prompt Continuation</b><br>
+    Based on the first setting, we additionally provide the first two bars as context.  
+    Using diffusion-based inpainting, the model continues the remaining six bars.
+  </li>
+  <li>
+    <b>Effect of Different Control Scales</b><br>
+    Since both ViTex and chord progression are trained with classifier-free guidance,  
+    we can independently adjust the control strengths $\lambda_{\text{ins}}$ (instrumentation) and $\lambda_{\text{chd}}$ (chord).  
+    This section demonstrates how varying control scales influence generation.
+  </li>
+  <li>
+    <b>Unconditional Generation</b><br>
+    We also show samples generated without any conditioning, demonstrating the model's ability to produce musically coherent pieces on its own.
+  </li>
+</ol>
+
+Regarding drums, our model supports drum generation. In this demo page, the drums are generated using a fixed drum ViTex.
+</section>
+    
+
+    <section class="text-description">
     <h1>
         Conditional Generation Given ViTex and Chord Progression
     </h1>
-    <p>
-        Our model takes ViTex and chord progression as inputs and generates multi-track symbolic music.
-      Below is a demo — click the left/right arrow buttons to switch between different ViTex–chord progression pairs, and the corresponding generated result will be displayed on the right.
-    </p>
+    <p style="font-size: 1.1em; line-height: 1.6;">
+    
+      Below is a demo — click the left and right arrows to browse different ViTex and chord progressions.
+The displayed ViTex and chord progression are used as the model's inputs, with both control scales fixed at $\lambda_{\text{ins}} = \lambda_{\text{chd}} = 1.0$.
+The corresponding generated result is shown on the right.</p>
+    </section>
+    
 
     <section class="horizontal-section">
         <!-- 图片 -->
@@ -44,7 +95,7 @@
         </div>
    
         <!-- Chord -->
-        <div class="block">
+        <div class="chord_progression">
             <h2>Chord Progression</h2>
             <midi-visualizer src="assets_cond_gen/c9.mid" type="piano-roll" id="midi-visualizer"></midi-visualizer>
             <midi-player
@@ -71,18 +122,74 @@
         </div>
     </section>
     
-
+    <section class="text-description">
     <h1>
         Prompt Continuation
     </h1>
-    <section class="prompt-continuation-section">
-        <div class="text-description">
-            <p>
+    <p style="font-size: 1.1em; line-height: 1.6;">
                 By leveraging diffusion-based inpainting, our model supports music continuation given prompts.
-    On the right is an example of prompt continuation: we feed the first two bars of the ground-truth piece, along with their corresponding ViTex and chord progression, into the model to generate the following six bars.
+    On the right is an example of prompt continuation: we feed the first two bars of the ground-truth piece, along with their corresponding ViTex and chord progression with control scale $\lambda_{\text{ins}} = \lambda_{\text{chd}} = 1.0$, into the model to generate the following six bars.
     We also compare our results with those produced by the Anticipatory Music Transformer (AMT).
-            </p>
+    </p>
+    
+    </section>
+
+    <section class="prompt-continuation-section">
+        <div class="comparison-results">
+            <div class="given-prompt-column">
+                <h3>Given Prompt</h3>
+                <img id="given-prompt-image" src="assets_cont/532/prompt.png" alt="Given Prompt" class="square-image">
+                <audio id="given-prompt-audio-player" src="assets_cont/532/prompt.mp3" controls></audio>
+            </div>
+            <div class="comparison-right-panel">
+                <div class="comparison-boxes">
+                    <div class="comparison-box-532 active" id="ground-truth-box-532" onclick="showComparison('ground-truth', '532')">
+                        <h3>Ground Truth</h3>
+                    </div>
+                    <div class="comparison-box-532" id="ours-box-532" onclick="showComparison('ours', '532')">
+                        <h3>Ours</h3>
+                    </div>
+                    <div class="comparison-box-532" id="amt-box-532" onclick="showComparison('amt', '532')">
+                        <h3>AMT</h3>
+                    </div>
+                </div>
+                <div class="comparison-display">
+                    <img id="comparison-pianoroll-532" src="assets_cont\532\gt.png" alt="Comparison Pianoroll" class="square-image">
+                    <audio id="comparison-audio-player-532" src="assets_cont\532\gt.mp3" controls></audio>
+                </div>
+            </div>
         </div>
+        
+    </section>
+    <section class="prompt-continuation-section">
+        <div class="comparison-results">
+            <div class="given-prompt-column">
+                <h3>Given Prompt</h3>
+                <img id="given-prompt-image" src="assets_cont/128/prompt.png" alt="Given Prompt" class="square-image">
+                <audio id="given-prompt-audio-player" src="assets_cont/128/prompt.mp3" controls></audio>
+            </div>
+            <div class="comparison-right-panel">
+                <div class="comparison-boxes">
+                    <div class="comparison-box-128 active" id="ground-truth-box-128" onclick="showComparison('ground-truth', '128')">
+                        <h3>Ground Truth</h3>
+                    </div>
+                    <div class="comparison-box-128" id="ours-box-128" onclick="showComparison('ours', '128')">
+                        <h3>Ours</h3>
+                    </div>
+                    <div class="comparison-box-128" id="amt-box-128" onclick="showComparison('amt', '128')">
+                        <h3>AMT</h3>
+                    </div>
+                </div>
+                <div class="comparison-display">
+                    <img id="comparison-pianoroll-128" src="assets_cont\128\gt.png" alt="Comparison Pianoroll" class="square-image">
+                    <audio id="comparison-audio-player-128" src="assets_cont\128\gt.mp3" controls></audio>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+  
+    <section class="prompt-continuation-section">
         <div class="comparison-results">
             <div class="given-prompt-column">
                 <h3>Given Prompt</h3>
@@ -91,25 +198,182 @@
             </div>
             <div class="comparison-right-panel">
                 <div class="comparison-boxes">
-                    <div class="comparison-box" id="ground-truth-box" onclick="showComparison('ground-truth')">
+                    <div class="comparison-box-830 active" id="ground-truth-box-830" onclick="showComparison('ground-truth', '830')">
                         <h3>Ground Truth</h3>
                     </div>
-                    <div class="comparison-box" id="ours-box" onclick="showComparison('ours')">
+                    <div class="comparison-box-830" id="ours-box-830" onclick="showComparison('ours', '830')">
                         <h3>Ours</h3>
                     </div>
-                    <div class="comparison-box" id="amt-box" onclick="showComparison('amt')">
+                    <div class="comparison-box-830" id="amt-box-830" onclick="showComparison('amt', '830')">
                         <h3>AMT</h3>
                     </div>
                 </div>
                 <div class="comparison-display">
-                    <img id="comparison-pianoroll" src="" alt="Comparison Pianoroll" class="square-image">
-                    <audio id="comparison-audio-player" src="" controls></audio>
+                    <img id="comparison-pianoroll-830" src="assets_cont\830\gt.png" alt="Comparison Pianoroll" class="square-image">
+                    <audio id="comparison-audio-player-830" src="assets_cont\830\gt.mp3" controls></audio>
                 </div>
             </div>
         </div>
+        
     </section>
 
+
     
+    <section class="text-description">
+    <h1>
+        Effect of Different Control Scales
+    </h1>
+    <p style="font-size: 1.1em; line-height: 1.6;">
+              Both the ViTex and chord progression conditions are trained using classifier-free guidance. We can independently adjust their control strengths, denoted as $\lambda_{\text{ins}}$ and $\lambda_{\text{chd}}$. For simplicity, we fix the ViTex and chord progression as follows:
+            
+    </p>
+    
+    </section>
+
+   
+        <!-- 图片 -->
+        <div class="cccc">
+            <h2>ViTex (Instrumentation)</h2>
+            <img id="carousel-image" src="assets_guidance\ins.png" alt="carousel" class="square-image" />
+        </div>
+
+        
+   
+        <!-- Chord -->
+        <div class="cccc">
+            <h2>Chord Progression</h2>
+            <midi-visualizer src="assets_guidance\chd.mid" type="piano-roll" id="midi-visualizer"></midi-visualizer>
+            <midi-player
+                src="assets_guidance\chd.mid"
+                sound-font visualizer="#midi-visualizer" id="midi-player">
+            </midi-player>
+        </div>
+
+        
+        <section class="text-description">
+   
+    <p style="font-size: 1.1em; line-height: 1.6;">
+          We then vary the values of $\lambda_{\text{ins}}$ and $\lambda_{\text{chd}}$. The table below shows the model’s generated outputs under different control strengths. From left to right, as the chord control increases, the generated music increasingly aligns with the given chord progression (F, G, Em, Am, F, G, Em, Am). From top to bottom, the model’s instrumentation gradually shifts from random to conforming to the specified ViTex control.    
+    </p>
+    
+    </section>
+
+    <div class="control-table-container">
+    <table class="control-comparison-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>$\lambda_{\text{chd}} = 0.0$</th>
+          <th>$\lambda_{\text{chd}} = 0.2$</th>
+          <th>$\lambda_{\text{chd}} = 0.5$</th>
+          <th>$\lambda_{\text{chd}} = 0.7$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 第一行：ViTex控制强度1 -->
+        <tr>
+          <td>$\lambda_{\text{ins}} = 0.0$</td>
+          <td>
+            <img src="assets_guidance/c0.0v0.0.png" alt="Vi1-Ch1" class="square-image">
+            <audio src="assets_guidance/c0.0v0.0.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.2v0.0.png" alt="Vi1-Ch2" class="square-image">
+            <audio src="assets_guidance/c0.2v0.0.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.5v0.0.png" alt="Vi1-Ch3" class="square-image">
+            <audio src="assets_guidance/c0.5v0.0.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.7v0.0.png" alt="Vi1-Ch4" class="square-image">
+            <audio src="assets_guidance/c0.7v0.0.mp3" controls></audio>
+          </td>
+        </tr>
+
+        <!-- 第二行：ViTex控制强度2 -->
+        <tr>
+          <td>$\lambda_{\text{ins}} = 0.3$</td>
+          <td>
+            <img src="assets_guidance/c0.0v0.3.png" alt="Vi2-Ch1" class="square-image">
+            <audio src="assets_guidance/c0.0v0.3.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.2v0.3.png" alt="Vi2-Ch2" class="square-image">
+            <audio src="assets_guidance/c0.2v0.3.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.5v0.3.png" alt="Vi2-Ch3" class="square-image">
+            <audio src="assets_guidance/c0.5v0.3.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.7v0.3.png" alt="Vi2-Ch4" class="square-image">
+            <audio src="assets_guidance/c0.7v0.3.mp3" controls></audio>
+          </td>
+        </tr>
+
+        <!-- 第三行：ViTex控制强度3 -->
+        <tr>
+          <td>$\lambda_{\text{ins}} = 1.2$</td>
+          <td>
+            <img src="assets_guidance/c0.0v1.2.png" alt="Vi3-Ch1" class="square-image">
+            <audio src="assets_guidance/c0.0v1.2.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.2v1.2.png" alt="Vi3-Ch2" class="square-image">
+            <audio src="assets_guidance/c0.2v1.2.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.5v1.2.png" alt="Vi3-Ch3" class="square-image">
+            <audio src="assets_guidance/c0.5v1.2.mp3" controls></audio>
+          </td>
+          <td>
+            <img src="assets_guidance/c0.7v1.2.png" alt="Vi3-Ch4" class="square-image">
+            <audio src="assets_guidance/c0.7v1.2.mp3" controls></audio>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+    <section class="text-description">
+    <h1>
+        Unconditional Generation
+    </h1>
+    <p style="font-size: 1.1em; line-height: 1.6;">
+      Below, we present additional samples of unconditional generation results, where both control strengths are set to zero (i.e., $\lambda_{\text{ins}} = \lambda_{\text{chd}} = 0.0$).</p>
+    
+    </section>
+    
+
+     <section class="horizontal-section">
+        
+        <!-- Audio -->
+        <div class="block">
+            
+            <img id="audio-pianoroll" src="assets_uncond/0.png" alt="Audio pianoroll", class="square-image">
+            <audio id="audio-player" src="assets_uncond/uncond0.mp3" controls></audio>
+        </div>
+        <!-- Audio -->
+        <div class="block">
+            
+            <img id="audio-pianoroll" src="assets_uncond/1.png" alt="Audio pianoroll", class="square-image">
+            <audio id="audio-player" src="assets_uncond/uncond1.mp3" controls></audio>
+        </div>
+
+        
+        <!-- Audio -->
+        <div class="block">
+           
+            <img id="audio-pianoroll" src="assets_uncond/2.png" alt="Audio pianoroll", class="square-image">
+            <audio id="audio-player" src="assets_uncond/uncond2.mp3" controls></audio>
+        </div>
+    </section>
+    
+    
+
     <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/html-midi-player@1.5.0"></script>
     <script src="script.js"></script>
 </body>

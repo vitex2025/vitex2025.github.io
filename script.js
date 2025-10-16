@@ -79,42 +79,65 @@ showChord();
 
 // Prompt Continuation Comparison
 const comparisonData = {
-    'ground-truth': {
-        pianoroll: "assets_cont/830/gt.png",
-        audio: "assets_cont/830/gt.mp3"
+    '830':{
+        'ground-truth': {
+            pianoroll: "assets_cont/830/gt.png",
+            audio: "assets_cont/830/gt.mp3"
+        },
+        'ours': {
+            pianoroll: "assets_cont/830/ours.png",
+            audio: "assets_cont/830/ours.mp3"
+        },
+        'amt': {
+            pianoroll: "assets_cont/830/atc.png",
+            audio: "assets_cont/830/atc.mp3"
+        }
     },
-    'ours': {
-        pianoroll: "assets_cont/830/ours.png",
-        audio: "assets_cont/830/ours.mp3"
+    '532':{
+        'ground-truth': {
+            pianoroll: "assets_cont/532/gt.png",
+            audio: "assets_cont/532/gt.mp3"
+        },
+        'ours': {
+            pianoroll: "assets_cont/532/ours.png",
+            audio: "assets_cont/532/ours.mp3"
+        },
+        'amt': {
+            pianoroll: "assets_cont/532/atc.png",
+            audio: "assets_cont/532/atc.mp3"
+        }
     },
-    'amt': {
-        pianoroll: "assets_cont/830/atc.png",
-        audio: "assets_cont/830/atc.mp3"
+    '128':{
+        'ground-truth': {
+            pianoroll: "assets_cont/128/gt.png",
+            audio: "assets_cont/128/gt.mp3"
+        },
+        'ours': {
+            pianoroll: "assets_cont/128/ours.png",
+            audio: "assets_cont/128/ours.mp3"
+        },
+        'amt': {
+            pianoroll: "assets_cont/128/atc.png",
+            audio: "assets_cont/128/atc.mp3"
+        }
     }
 };
 
-const givenPromptImage = document.getElementById("given-prompt-image");
-givenPromptImage.src = "assets_cont/830/prompt.png"; // Set the initial given prompt image
-
-const givenPromptAudioPlayer = document.getElementById("given-prompt-audio-player");
-givenPromptAudioPlayer.src = "assets_cont/830/prompt.mp3"; // Set the initial given prompt audio
 
 const comparisonPianoroll = document.getElementById("comparison-pianoroll");
 const comparisonAudioPlayer = document.getElementById("comparison-audio-player");
 const comparisonBoxes = document.querySelectorAll(".comparison-box");
 
-function showComparison(type) {
+function showComparison(type, idx) {
     // Remove active class from all boxes
-    comparisonBoxes.forEach(box => box.classList.remove("active"));
+    document.querySelectorAll(`.comparison-box-${idx}`).forEach(box => box.classList.remove("active"));
 
     // Add active class to the clicked box
-    document.getElementById(`${type}-box`).classList.add("active");
+    document.getElementById(`${type}-box-${idx}`).classList.add("active");
 
     // Update pianoroll and audio
-    comparisonPianoroll.src = comparisonData[type].pianoroll;
-    comparisonAudioPlayer.src = comparisonData[type].audio;
-    comparisonAudioPlayer.load(); // Load the new audio source
+    document.getElementById(`comparison-pianoroll-${idx}`).src = comparisonData[idx][type].pianoroll;
+    document.getElementById(`comparison-audio-player-${idx}`).src = comparisonData[idx][type].audio;
+    document.getElementById(`comparison-audio-player-${idx}`).load(); // Load the new audio source
 }
 
-// Initialize with Ground Truth selected
-showComparison('ground-truth');

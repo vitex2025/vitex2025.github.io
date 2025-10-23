@@ -25,6 +25,7 @@ h2 {
 }
 
 .horizontal-section {
+    width: 80%;
     align-items: center; /* Changed from flex-start to center */
     display: flex;
     justify-content: center;
@@ -174,8 +175,8 @@ button {
     width: 200px; /* 600px / 3 = 200px */
     height: 500px; /* 与右侧pianoroll图片高度相同 */
     object-fit: contain;
-    border: 1px solid #eee;
-    border-radius: 4px;
+    
+    margin-top: 15px;
 }
 
 .comparison-right-panel {
@@ -296,6 +297,7 @@ button {
     height: 500px; /* Adjust as needed */
     object-fit: contain;
     margin-bottom: 15px;
+    margin-top: 15px;
     
 }
 
@@ -311,17 +313,19 @@ button {
 }
 
 .control-table-container {
-  margin: 20px 0;
+  width: 90%;
+  margin: 0 auto;
   overflow-x: auto;
   background-color: #ffffff;
-  padding: 20px; /* 外部的边距，你可以根据需要调整大小 */
+  padding: 5px; /* 外部的边距，你可以根据需要调整大小 */
   border-radius: 8px; /* 可选：添加圆角 */
 }
 
 .control-comparison-table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   table-layout: fixed;
+  margin: 0 auto; /* 居中对齐 */
   
 }
 
@@ -334,7 +338,7 @@ button {
 .control-comparison-table th:first-child,
 .control-comparison-table td:first-child {
   font-weight: bold; /* 字体加粗 */
-  width: 5%; /* 设置宽度为15%，你可以根据需要调整此值 */
+  width: 10%; /* 设置宽度为15%，你可以根据需要调整此值 */
 }
 
 .control-comparison-table img {

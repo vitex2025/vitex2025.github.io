@@ -91,6 +91,10 @@ const comparisonData = {
         'amt': {
             pianoroll: "assets_cont/830/atc.png",
             audio: "assets_cont/830/atc.mp3"
+        },
+        'mmt': {
+            pianoroll: "assets_cont/830/mmt.png",
+            audio: "assets_cont/830/mmt.mp3"
         }
     },
     '532':{
@@ -105,6 +109,10 @@ const comparisonData = {
         'amt': {
             pianoroll: "assets_cont/532/atc.png",
             audio: "assets_cont/532/atc.mp3"
+        },
+        'mmt': {
+            pianoroll: "assets_cont/532/mmt.png",
+            audio: "assets_cont/532/mmt.mp3"
         }
     },
     '128':{
@@ -119,6 +127,10 @@ const comparisonData = {
         'amt': {
             pianoroll: "assets_cont/128/atc.png",
             audio: "assets_cont/128/atc.mp3"
+        },
+        'mmt': {
+            pianoroll: "assets_cont/128/mmt.png",
+            audio: "assets_cont/128/mmt.mp3"
         }
     }
 };

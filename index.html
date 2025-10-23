@@ -129,7 +129,7 @@ The corresponding generated result is shown on the right.</p>
     <p style="font-size: 1.1em; line-height: 1.6;">
                 By leveraging diffusion-based inpainting, our model supports music continuation given prompts.
     On the right is an example of prompt continuation: we feed the first two bars of the ground-truth piece, along with their corresponding ViTex and chord progression with control scale $\lambda_{\text{ins}} = \lambda_{\text{chd}} = 1.0$, into the model to generate the following six bars.
-    We also compare our results with those produced by the Anticipatory Music Transformer (AMT).
+    We also compare our results with those produced by the <a href="https://github.com/jthickstun/anticipation" target="_blank">Anticipatory Music Transformer (AMT) </a> and <a href="https://hermandong.com/mmt/" target="_blank">Multitrack Music Transformer (MMT)</a>. For AMT, we used its medium-sized checkpoint, and for MMT, we used the first checkpoint made publicly available among its many public checkpoints.
     </p>
     
     </section>
@@ -151,6 +151,9 @@ The corresponding generated result is shown on the right.</p>
                     </div>
                     <div class="comparison-box-532" id="amt-box-532" onclick="showComparison('amt', '532')">
                         <h3>AMT</h3>
+                    </div>
+                    <div class="comparison-box-532" id="mmt-box-532" onclick="showComparison('mmt', '532')">
+                        <h3>MMT</h3>
                     </div>
                 </div>
                 <div class="comparison-display">
@@ -179,6 +182,9 @@ The corresponding generated result is shown on the right.</p>
                     <div class="comparison-box-128" id="amt-box-128" onclick="showComparison('amt', '128')">
                         <h3>AMT</h3>
                     </div>
+                    <div class="comparison-box-128" id="mmt-box-128" onclick="showComparison('mmt', '128')">
+                        <h3>MMT</h3>
+                    </div>
                 </div>
                 <div class="comparison-display">
                     <img id="comparison-pianoroll-128" src="assets_cont\128\gt.png" alt="Comparison Pianoroll" class="square-image">
@@ -206,6 +212,9 @@ The corresponding generated result is shown on the right.</p>
                     </div>
                     <div class="comparison-box-830" id="amt-box-830" onclick="showComparison('amt', '830')">
                         <h3>AMT</h3>
+                    </div>
+                    <div class="comparison-box-830" id="mmt-box-830" onclick="showComparison('mmt', '830')">
+                        <h3>MMT</h3>
                     </div>
                 </div>
                 <div class="comparison-display">
